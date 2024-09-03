@@ -26,7 +26,7 @@ class Store(MethodView):
             
 @blp.route("/store")
 class StoreList(MethodView):
-    @blp.respnse(201, StoreSchema, many=True)
+    @blp.response(201, StoreSchema, many=True)
     def get(self):
         return stores.values()
     
