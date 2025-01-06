@@ -11,3 +11,5 @@ marshmallow==3.22.0
 packaging==24.1
 webargs==8.4.0
 Werkzeug==3.0.4
+sqlalchemy
+flask-sqlalchemy
