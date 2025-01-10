@@ -13,10 +13,8 @@ blp = Blueprint("Items", __name__, description="Operations on items")
 class Item(MethodView):
     @blp.response(200, ItemSchema)
     def get(self, item_id):
-        try:
-            return items[item_id]
-        except KeyError:
-            abort(404, message="Item not found.")
+        item=ItemModel.query.get_or_404(item_id)
+        return item
     
     def delete(self, item_id):
         try:
