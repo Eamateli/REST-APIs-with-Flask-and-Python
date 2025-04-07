@@ -36,7 +36,7 @@ class StoreList(MethodView):
     def post(self, store_data):
         store = StoreModel(**store_data)
         try:
-            db.session.add(item)
+            db.session.add(store)
             db.session.commit()
         except IndexError:
             abort(400, message="A store with that name already exists.",)
