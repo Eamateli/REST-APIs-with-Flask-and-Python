@@ -16,7 +16,7 @@ class UserRegister(MethodView):
             abort(409, message="A user with that username already exists.")
             
         user = UserModel(
-            username=user_data["username"]
+            username=user_data["username"],
             password=pbkdf2_sha256.hash(user_data["password"])
             
         )
