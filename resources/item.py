@@ -1,7 +1,6 @@
-import uuid
-from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
+from flask_jwt_extended import jwt_required
 from sqlalchemy.exc import SQLAlchemyError
 from db import db
 from models import ItemModel
@@ -38,7 +37,7 @@ class ItemList(MethodView):
     @blp.response(200, ItemSchema(many=True))
     def get(self):
         return ItemModel.query.all()
-    
+    @jwt_required()
     @blp.arguments(ItemSchema)
     @blp.response(201, ItemSchema)   
     def post(self, item_data):
@@ -49,8 +48,5 @@ class ItemList(MethodView):
             db.session.commit()
         except SQLAlchemyError:
             abort(500, message="An error occurred while  inserting the item.")    
-             
         
-                    
-            
-        return item, 201
+        return item
