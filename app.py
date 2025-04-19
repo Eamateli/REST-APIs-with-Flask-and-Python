@@ -35,6 +35,8 @@ def create_app(db_url=None):
     app.config["JWT_SECRET_KEY"] = "eri"
     jwt = JWTManager(app)
     
+    @jwt.additional_claims_loader
+    
     @jwt.expired_token_loader
     def expired_token_callback(jwt_header, jwt_payload):
         return (
