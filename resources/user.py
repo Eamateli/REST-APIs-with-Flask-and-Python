@@ -14,7 +14,7 @@ blp = Blueprint("Users", "users", description="Opertons on users")
 class UserRegister(MethodView):
     @blp.arguments(UserSchema)
     def post(self, user_data):
-        if UserModel.query.filter(UserModel.username == user_data["username"]).firts():
+        if UserModel.query.filter(UserModel.username == user_data["username"]).first():
             abort(409, message="A user with that username already exists.")
             
         user = UserModel(
@@ -38,7 +38,7 @@ class UserLogin(MethodView):
         
         if user and pbkdf2_sha256.verify(user_data["password"], user.password):
             access_token = create_access_token(identity=str(user.id))
-            return {"access_token": access_token}
+            return {"access_token": access_token}, 200
         
         abort(401, message="invalid credentials.")
     
