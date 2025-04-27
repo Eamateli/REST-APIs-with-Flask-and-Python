@@ -1,5 +1,5 @@
 import os
-
+from dotenv import load_dotenv
 
 from flask import Flask, jsonify
 from flask_smorest import Api

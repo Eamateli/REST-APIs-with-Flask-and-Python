@@ -1,3 +1,5 @@
+import requests
+import os
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from passlib.hash import  pbkdf2_sha256
@@ -11,6 +13,9 @@ from schemas import UserSchema
 blp = Blueprint("Users", "users", description="Opertons on users")
 
 @blp.route("/register")
+
+#mailgun function goes here
+
 class UserRegister(MethodView):
     @blp.arguments(UserSchema)
     def post(self, user_data):
