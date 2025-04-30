@@ -1,5 +1,3 @@
-import requests
-import os
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from passlib.hash import  pbkdf2_sha256
@@ -14,15 +12,7 @@ blp = Blueprint("Users", "users", description="Opertons on users")
 
 @blp.route("/register")
 
-def send_simple_message(to, subject, body):
-    domain = os.getenv("MAILGUN_DOMAIN")
-    requests.post(
-  	    f"https://api.mailgun.net/v3/{domain}/messages",
-  		auth=("api", os.getenv('API_KEY', os.getenv("MAILGUN_API_KEY"))),
-  		data={"from": "Mailgun Sandbox <postmaster@{domain}",
-			"to": [to],
-  			"subject": [subject],
-  			"text": [body]})
+
 
 class UserRegister(MethodView):
     @blp.arguments(UserRegisterSchema)
