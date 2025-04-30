@@ -11,9 +11,6 @@ from schemas import UserSchema, UserRegisterSchema
 blp = Blueprint("Users", "users", description="Opertons on users")
 
 @blp.route("/register")
-
-
-
 class UserRegister(MethodView):
     @blp.arguments(UserRegisterSchema)
     def post(self, user_data):
@@ -32,12 +29,7 @@ class UserRegister(MethodView):
         )
         db.session.add(user)
         db.session.commit()
-        
-        send_simple_message(
-            to=user.email,
-            subject="Successfully signed up",
-            body=f"Hi {user.username}! You have successfully signed up to the Stores REST API."
-        )
+    
         
         return {"message": "User created successfully."}, 201
 
